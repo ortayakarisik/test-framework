@@ -8,6 +8,8 @@ src
   + main
   + test
     + java                          Test runners and supporting code
+      + com.hymnai.testframework.web  
+        + stepdefinitions           Step definitions
     + resources
       + features                    Feature files
         + user                      Feature file subdirectories 
@@ -93,5 +95,5 @@ environments {
   
 You use the `environment` system property to determine which environment to run against. For example to run the tests in the staging environment, you could run:
 ```json
-$ gradle clean test -Denvironment=staging
+$ gradle clean test -Penvironment=staging
 ```
