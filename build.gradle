@@ -1,0 +1,89 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.71")
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'checkstyle'
+    id 'pmd'
+    id 'io.franzbecker.gradle-lombok' version '3.1.0'
+}
+
+ext.DEFAULT_PROJECT_COMPANY = "hymnai"
+ext.DEFAULT_PROJECT_TEAM = "hymnai"
+ext.DEFAULT_IGNORE_FAILURES = false
+
+ext.versions = [
+        serenity            : "2.0.71",
+        serenityCucumber    : "1.9.45",
+        junit               : "4.12",
+        assertj             : "3.13.2",
+        lombok              : "1.18.10",
+        slf4jApi            : "1.7.28",
+        logback             : '1.2.3',
+]
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+jar.enabled = false
+
+allprojects {
+    version = '1.0.0'
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects { subproject ->
+
+    apply plugin: 'groovy'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'checkstyle'
+    apply plugin: 'pmd'
+    apply plugin: 'net.serenity-bdd.aggregator'
+
+    jar {
+        enabled = true
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok:${versions.lombok}"
+
+        annotationProcessor "org.projectlombok:lombok:${versions.lombok}"
+    }
+
+    test {
+    }
+
+    checkstyle {
+        toolVersion = '8.11'
+        ignoreFailures = getSafeProperty(project, 'ignoreFailures', DEFAULT_IGNORE_FAILURES)
+        configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    }
+
+    pmd {
+        ignoreFailures = getSafeProperty(project, 'ignoreFailures', DEFAULT_IGNORE_FAILURES)
+        rulePriority = 3
+        consoleOutput = false
+        toolVersion = '5.5.5'
+        sourceSets = [sourceSets.main]
+        ruleSetFiles = files("${project.rootDir}/config/pmd/ruleset.xml")
+    }
+}
+
+
+def getSafeProperty(project, key, defaultValue) {
+    return project.findProperty(key) ?: defaultValue
+}
+

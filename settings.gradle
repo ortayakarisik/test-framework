@@ -1,0 +1,6 @@
+rootProject.name = 'test-framework'
+include 'web'
+include 'web-test'
+
+project(":web").projectDir = file("hymnai-web")
+project(":web-test").projectDir = file("hymnai-web-test")

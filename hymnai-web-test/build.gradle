@@ -1,0 +1,26 @@
+ext.serviceName = "hymnai-web-test"
+
+jar {
+    baseName = "${rootProject.name}-${serviceName}"
+}
+
+test {
+    try {
+        systemProperty "environment", project.getProperty("environment")
+    } catch (Exception ex) {}
+    try {
+        systemProperty "webdriver.driver", project.getProperty("webdriver.driver")
+    } catch (Exception ex) {}
+}
+
+dependencies {
+    compile project(':web')
+    testCompile "org.assertj:assertj-core:${versions.assertj}"
+    testCompile "junit:junit:${versions.junit}"
+    testCompile "net.serenity-bdd:serenity-core:${versions.serenity}"
+    testCompile "net.serenity-bdd:serenity-junit:${versions.serenity}"
+    testCompile "net.serenity-bdd:serenity-cucumber:${versions.serenityCucumber}"
+    testCompile "org.projectlombok:lombok:${versions.lombok}"
+    testCompile "org.slf4j:slf4j-api:${versions.slf4jApi}"
+    testCompile "ch.qos.logback:logback-classic:${versions.logback}"
+}

@@ -1,0 +1,16 @@
+ext.serviceName = "hymnai-web"
+
+jar {
+    baseName = "${rootProject.name}-${serviceName}"
+}
+
+dependencies {
+    compile "org.assertj:assertj-core:${versions.assertj}"
+    compile "junit:junit:${versions.junit}"
+    compile "net.serenity-bdd:serenity-core:${versions.serenity}"
+    compile "net.serenity-bdd:serenity-junit:${versions.serenity}"
+    compile "net.serenity-bdd:serenity-cucumber:${versions.serenityCucumber}"
+    compile "org.projectlombok:lombok:${versions.lombok}"
+    compile "org.slf4j:slf4j-api:${versions.slf4jApi}"
+    compile "ch.qos.logback:logback-classic:${versions.logback}"
+}
