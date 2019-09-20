@@ -10,8 +10,9 @@ src
     + java                          Test runners and supporting code
     + resources
       + features                    Feature files
-        + search                    Feature file subdirectories 
-          search_by_keyword.feature  
+        + user                      Feature file subdirectories 
+          user_login.feature  
+          user_register.feature  
       + webdriver                   Bundled webdriver binaries
         + linux
         + mac
